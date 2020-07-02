@@ -1,23 +1,23 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import SideBar from "./SideBar/SideBar";
 
-function App() {
+function MainLayout() {
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
-        <div className="col-sm">
+        <div className="col-md-2">
+          <SideBar />
+        </div>
+        <div className="col-md-9">
           <button type="button" className="btn btn-primary">
             Primary
             <FontAwesomeIcon icon={faDownload}></FontAwesomeIcon>
           </button>
-        </div>
-        <div className="col-sm">
           <button type="button" className="btn btn-primary">
             Primary
           </button>
-        </div>
-        <div className="col-sm">
           <button type="button" className="btn btn-primary">
             Primary
           </button>
@@ -27,4 +27,4 @@ function App() {
   );
 }
 
-export default App;
+export default MainLayout;
