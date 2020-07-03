@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faSave, faPlus } from "@fortawesome/free-solid-svg-icons";
 import Paragraphs from "./Paragraphs";
 import { IMenuContent, IParagraph } from "../../dataModels";
+import "./MainContent.styles.css";
 
 export interface Props {
   currentPage: IMenuContent | null;
@@ -15,9 +16,13 @@ const PageContent: React.FC<Props> = ({ currentPage }) => {
   return currentPage ? (
     <div>
       <div>
-        <h1 className="display-4">
-          {currentPage.title}
-          {/* <input type="text" defaultValue={currentPage.title}></input> */}
+        <h1>
+          {/* {currentPage.title} */}
+          <input
+            className="no-border"
+            type="text"
+            defaultValue={currentPage.title}
+          ></input>
         </h1>
         <div className="text-right">
           <div className="btn-group">
