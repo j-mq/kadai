@@ -1,7 +1,9 @@
 export interface IMainMenu {
-  secondMenus: ISecondaryMenus[];
+  secondMenus: IInnerMenus[];
+  thirdMenus: IInnerMenus[];
+  id: number;
 }
 
-export interface ISecondaryMenus {
-  thirdMenus: number;
+export interface IInnerMenus {
+  id: number;
 }
