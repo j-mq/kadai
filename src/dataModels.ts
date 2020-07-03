@@ -18,10 +18,19 @@ export interface IThirdMenus {
 export interface IMenuContent {
   title: string;
   paragraph: IParagraph[];
+  mainMenuId: number;
+  secondMenuId?: number;
+  thirdMenuId?: number;
 }
 
 export interface IParagraph {
-  content: string;
+  id: number;
+  text: string;
+}
+
+export enum contentEditTypes {
+  addParagraph,
+  removeParagraph,
 }
 
 export enum menuTypes {

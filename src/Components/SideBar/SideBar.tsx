@@ -32,7 +32,8 @@ const SideBar: React.FC<Props> = ({
       id: id,
       content: {
         title: "Main Menu Title",
-        paragraph: [{ content: "Main Menu Paragraph" }],
+        paragraph: [{ id: 0, text: "Main Menu Paragraph" }],
+        mainMenuId: id,
       },
     };
     currentMenus.push(newMenu);
@@ -65,7 +66,9 @@ const SideBar: React.FC<Props> = ({
       id: id,
       content: {
         title: "Second Menu Title",
-        paragraph: [{ content: "Second Menu Paragraph" }],
+        paragraph: [{ id: 0, text: "Second Menu Paragraph" }],
+        mainMenuId: mainId,
+        secondMenuId: id,
       },
     };
     currentMenus[mainId].secondMenus.push(newSecondaryMenu);
@@ -97,7 +100,10 @@ const SideBar: React.FC<Props> = ({
       id: id,
       content: {
         title: "Third Menu Title",
-        paragraph: [{ content: "Third Menu Paragraph" }],
+        paragraph: [{ id: 0, text: "Third Menu Paragraph" }],
+        mainMenuId: mainId,
+        secondMenuId: secondId,
+        thirdMenuId: id,
       },
     };
     currentMenus[mainId].secondMenus[secondId].thirdMenus.push(newThirdMenu);

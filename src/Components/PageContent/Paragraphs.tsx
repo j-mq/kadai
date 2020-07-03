@@ -6,9 +6,10 @@ import "./MainContent.styles.css";
 
 export interface Props {
   paragraphs: IParagraph[];
+  removeThisParagraph: (paragraphId: number) => void;
 }
 
-const Paragraphs: React.FC<Props> = ({ paragraphs }) => {
+const Paragraphs: React.FC<Props> = ({ paragraphs, removeThisParagraph }) => {
   return (
     <Fragment>
       {paragraphs.map((pa) => (
@@ -16,12 +17,16 @@ const Paragraphs: React.FC<Props> = ({ paragraphs }) => {
           <p className="w-100">
             <textarea
               className="no-border form-control no-resize"
-              defaultValue={pa.content}
+              defaultValue={pa.text}
               rows={3}
             ></textarea>
           </p>
           <div className="text-right">
-            <button type="button" className="btn btn-primary btn-sm">
+            <button
+              type="button"
+              className="btn btn-primary btn-sm"
+              onClick={() => removeThisParagraph(pa.id)}
+            >
               <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
             </button>
           </div>

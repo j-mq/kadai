@@ -7,9 +7,24 @@ import "./MainContent.styles.css";
 
 export interface Props {
   currentPage: IMenuContent | null;
+  addParagraph: (
+    mainMenuId: number,
+    secondMenuId?: number,
+    thirdMenuId?: number
+  ) => void;
+  removeParagraph: (
+    paragraphId: number,
+    mainMenuId: number,
+    secondMenuId?: number,
+    thirdMenuId?: number
+  ) => void;
 }
 
-const PageContent: React.FC<Props> = ({ currentPage }) => {
+const PageContent: React.FC<Props> = ({
+  currentPage,
+  addParagraph,
+  removeParagraph,
+}) => {
   const [title, setTitle] = useState<string>("Title");
   const [paragraphs, setParagraphs] = useState<IParagraph[]>([]);
 
@@ -21,7 +36,7 @@ const PageContent: React.FC<Props> = ({ currentPage }) => {
           <input
             className="no-border"
             type="text"
-            defaultValue={currentPage.title}
+            value={currentPage.title}
           ></input>
         </h1>
         <div className="text-right">
@@ -35,9 +50,29 @@ const PageContent: React.FC<Props> = ({ currentPage }) => {
           </div>
         </div>
       </div>
-      <Paragraphs paragraphs={currentPage.paragraph} />
+      <Paragraphs
+        paragraphs={currentPage.paragraph}
+        removeThisParagraph={(id) =>
+          removeParagraph(
+            id,
+            currentPage.mainMenuId,
+            currentPage.secondMenuId,
+            currentPage.thirdMenuId
+          )
+        }
+      />
       <div className="text-center">
-        <button type="button" className="btn btn-primary btn-sm">
+        <button
+          type="button"
+          className="btn btn-primary btn-sm"
+          onClick={() =>
+            addParagraph(
+              currentPage.mainMenuId,
+              currentPage.secondMenuId,
+              currentPage.thirdMenuId
+            )
+          }
+        >
           <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
         </button>
       </div>
