@@ -2,14 +2,25 @@ import React, { useState } from "react";
 import "./SideBar.styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import MainMenus from "./Menus/MainMenus";
-import { IMainMenu, ISecondMenus, IThirdMenus } from "../../dataModels";
+import MainMenus from "./MainMenus";
+import {
+  IMainMenu,
+  ISecondMenus,
+  IThirdMenus,
+  IMenuContent,
+} from "../../dataModels";
 
-export interface Props {}
+export interface Props {
+  mainMenus: IMainMenu[];
+  updateMenus: (newMenus: IMainMenu[]) => void;
+  showMenuContent: (content: IMenuContent) => void;
+}
 
-const SideBar: React.FC<Props> = ({}) => {
-  const [mainMenus, setMainMenus] = useState<IMainMenu[]>([]);
-
+const SideBar: React.FC<Props> = ({
+  mainMenus,
+  updateMenus,
+  showMenuContent,
+}) => {
   console.log("The main menus", mainMenus);
 
   const addMainMenu = () => {
@@ -19,9 +30,13 @@ const SideBar: React.FC<Props> = ({}) => {
     let newMenu: IMainMenu = {
       secondMenus: [],
       id: id,
+      content: {
+        title: "Main Menu Title",
+        paragraph: [{ content: "Main Menu Paragraph" }],
+      },
     };
     currentMenus.push(newMenu);
-    setMainMenus(currentMenus);
+    updateMenus(currentMenus);
   };
 
   const removeMainMenu = (mainId: number) => {
@@ -32,7 +47,7 @@ const SideBar: React.FC<Props> = ({}) => {
           currentMenus.splice(index, 1);
         }
       });
-      setMainMenus(currentMenus);
+      updateMenus(currentMenus);
     }
   };
 
@@ -48,9 +63,13 @@ const SideBar: React.FC<Props> = ({}) => {
     let newSecondaryMenu: ISecondMenus = {
       thirdMenus: [],
       id: id,
+      content: {
+        title: "Second Menu Title",
+        paragraph: [{ content: "Second Menu Paragraph" }],
+      },
     };
     currentMenus[mainId].secondMenus.push(newSecondaryMenu);
-    setMainMenus(currentMenus);
+    updateMenus(currentMenus);
   };
 
   const removeSecondaryMenu = (mainId: number, secondId: number) => {
@@ -61,7 +80,7 @@ const SideBar: React.FC<Props> = ({}) => {
           currentMenus[mainId].secondMenus.splice(index, 1);
         }
       });
-      setMainMenus(currentMenus);
+      updateMenus(currentMenus);
     }
   };
 
@@ -76,9 +95,13 @@ const SideBar: React.FC<Props> = ({}) => {
     let currentMenus = [...mainMenus];
     let newThirdMenu: IThirdMenus = {
       id: id,
+      content: {
+        title: "Third Menu Title",
+        paragraph: [{ content: "Second Menu Paragraph" }],
+      },
     };
     currentMenus[mainId].secondMenus[secondId].thirdMenus.push(newThirdMenu);
-    setMainMenus(currentMenus);
+    updateMenus(currentMenus);
   };
 
   const removeThirdMenu = (
@@ -96,7 +119,7 @@ const SideBar: React.FC<Props> = ({}) => {
           );
         }
       });
-      setMainMenus(currentMenus);
+      updateMenus(currentMenus);
     }
   };
 
@@ -110,6 +133,7 @@ const SideBar: React.FC<Props> = ({}) => {
           removeSecondaryMenu={removeSecondaryMenu}
           addThirdMenu={addThirdMenu}
           removeThirdMenu={removeThirdMenu}
+          showMenuContent={showMenuContent}
         />
         <div className="text-center">
           <button

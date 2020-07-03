@@ -1,13 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlusCircle,
-  faMinusCircle,
-  faPlus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import SecondMenus from "./SecondMenus";
-import ThirdMenus from "./ThirdMenus";
-import { IMainMenu } from "../../../dataModels";
+import { IMainMenu, IMenuContent } from "../../dataModels";
 
 export interface Props {
   mainMenus: IMainMenu[];
@@ -16,6 +11,7 @@ export interface Props {
   removeSecondaryMenu: (mainId: number, secondId: number) => void;
   addThirdMenu: (mainId: number, secondId: number) => void;
   removeThirdMenu: (mainId: number, secondId: number, thirdId: number) => void;
+  showMenuContent: (content: IMenuContent) => void;
 }
 
 const MainMenus: React.FC<Props> = ({
@@ -25,13 +21,20 @@ const MainMenus: React.FC<Props> = ({
   removeSecondaryMenu,
   addThirdMenu,
   removeThirdMenu,
+  showMenuContent,
 }) => {
   const makeMainMenus = () =>
     mainMenus.length > 0 ? (
       mainMenus.map((maMe) => (
-        <div className="mb-3">
+        <div className="mb-3" key={`mainMenu-${maMe.id}`}>
           <h4 className="d-flex justify-content-between align-items-center px-3">
-            <span>Main menu</span>
+            <a
+              className="nav-link text-white m-0 p-0"
+              href="#"
+              onClick={() => showMenuContent(maMe.content)}
+            >
+              Main menu
+            </a>
             <div className="btn-group text-right">
               <button
                 className="btn btn-sm btn-link text-white mx-1 p-0"
@@ -56,6 +59,7 @@ const MainMenus: React.FC<Props> = ({
               removeThirdMenu(maMe.id, secondId, thirdId)
             }
             addMenuHere={(secondId) => addThirdMenu(maMe.id, secondId)}
+            showMenuContent={showMenuContent}
           />
         </div>
       ))

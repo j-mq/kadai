@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { IMainMenu, ISecondMenus } from "../../../dataModels";
+import { IMainMenu, ISecondMenus, IMenuContent } from "../../dataModels";
 import ThirdMenus from "./ThirdMenus";
 
 export interface Props {
@@ -9,6 +9,7 @@ export interface Props {
   removeThisSecondMenu: (secondId: number) => void;
   removeThisThirdMenu: (secondId: number, thirdId: number) => void;
   addMenuHere: (secondId: number) => void;
+  showMenuContent: (content: IMenuContent) => void;
 }
 
 const SecondMenus: React.FC<Props> = ({
@@ -16,13 +17,20 @@ const SecondMenus: React.FC<Props> = ({
   removeThisSecondMenu,
   removeThisThirdMenu,
   addMenuHere,
+  showMenuContent,
 }) => {
   const makeSecondMenus = () =>
     secondaryMenus.length > 0 &&
     secondaryMenus.map((seMe) => (
-      <div className="mb-2">
+      <div className="mb-2" key={`secondMenu-${seMe.id}`}>
         <h5 className="d-flex justify-content-between align-items-center px-3 mb-1">
-          <span>2nd Menu</span>
+          <a
+            className="nav-link text-white m-0 p-0"
+            href="#"
+            onClick={() => showMenuContent(seMe.content)}
+          >
+            2nd Menu
+          </a>
           <div className="btn-group text-right">
             <button
               className="btn btn-sm btn-link text-white mx-1 p-0"
@@ -41,6 +49,7 @@ const SecondMenus: React.FC<Props> = ({
         <ThirdMenus
           thirdMenus={seMe.thirdMenus}
           removeThisMenu={(thirdId) => removeThisThirdMenu(seMe.id, thirdId)}
+          showMenuContent={showMenuContent}
         />
       </div>
     ));

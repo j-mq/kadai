@@ -1,8 +1,13 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { IParagraph } from "../../dataModels";
 
-const Paragraphs = () => {
+export interface Props {
+  paragraphs: IParagraph[];
+}
+
+const Paragraphs: React.FC<Props> = ({ paragraphs }) => {
   return (
     <div className="my-3">
       <p>
