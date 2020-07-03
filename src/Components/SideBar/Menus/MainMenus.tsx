@@ -14,8 +14,8 @@ export interface Props {
   removeMainMenu: (mainId: number) => void;
   addSecondaryMenu: (maindId: number) => void;
   removeSecondaryMenu: (mainId: number, secondId: number) => void;
-  addThirdMenu: (mainId: number) => void;
-  removeThirdMenu: (mainId: number, thirdId: number) => void;
+  addThirdMenu: (mainId: number, secondId: number) => void;
+  removeThirdMenu: (mainId: number, secondId: number, thirdId: number) => void;
 }
 
 const MainMenus: React.FC<Props> = ({
@@ -26,11 +26,6 @@ const MainMenus: React.FC<Props> = ({
   addThirdMenu,
   removeThirdMenu,
 }) => {
-  //const ref = useRef(initialValue);
-  // console.log("THE MENUS?", mainMenus);
-
-  // useEffect(() => {}, [mainMenus]);
-
   const makeMainMenus = () =>
     mainMenus.length > 0 ? (
       mainMenus.map((maMe) => (
@@ -54,12 +49,13 @@ const MainMenus: React.FC<Props> = ({
           </h4>
           <SecondMenus
             secondaryMenus={maMe.secondMenus}
-            removeThisMenu={(id) => removeSecondaryMenu(maMe.id, id)}
-            addMenuHere={() => console.log("NO NO NO must go deeper!")}
-          />
-          <ThirdMenus
-            thirdMenus={maMe.thirdMenus}
-            removeThisMenu={(id) => removeThirdMenu(maMe.id, id)}
+            removeThisSecondMenu={(secondId) =>
+              removeSecondaryMenu(maMe.id, secondId)
+            }
+            removeThisThirdMenu={(secondId, thirdId) =>
+              removeThirdMenu(maMe.id, secondId, thirdId)
+            }
+            addMenuHere={(secondId) => addThirdMenu(maMe.id, secondId)}
           />
         </div>
       ))

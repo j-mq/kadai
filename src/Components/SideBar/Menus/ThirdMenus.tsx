@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
-import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { IThirdMenus } from "../../../dataModels";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IInnerMenus } from "../../../dataModels";
+import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 
 export interface Props {
-  thirdMenus: IInnerMenus[];
-  removeThisMenu: (secondId: number) => void;
+  thirdMenus: IThirdMenus[];
+  removeThisMenu: (thirdId: number) => void;
 }
 
 const ThirdMenus: React.FC<Props> = ({ thirdMenus, removeThisMenu }) => {

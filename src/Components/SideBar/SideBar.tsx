@@ -3,19 +3,22 @@ import "./SideBar.styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import MainMenus from "./Menus/MainMenus";
-import { IMainMenu, IInnerMenus } from "../../dataModels";
+import { IMainMenu, ISecondMenus, IThirdMenus } from "../../dataModels";
 
 export interface Props {}
 
 const SideBar: React.FC<Props> = ({}) => {
   const [mainMenus, setMainMenus] = useState<IMainMenu[]>([]);
 
+  console.log("The main menus", mainMenus);
+
   const addMainMenu = () => {
+    let id = mainMenus.length > 0 ? mainMenus[mainMenus.length - 1].id + 1 : 0;
+
     let currentMenus = [...mainMenus];
     let newMenu: IMainMenu = {
       secondMenus: [],
-      thirdMenus: [],
-      id: mainMenus.length,
+      id: id,
     };
     currentMenus.push(newMenu);
     setMainMenus(currentMenus);
@@ -34,9 +37,17 @@ const SideBar: React.FC<Props> = ({}) => {
   };
 
   const addSecondaryMenu = (mainId: number) => {
+    let id =
+      mainMenus[mainId].secondMenus.length > 0
+        ? mainMenus[mainId].secondMenus[
+            mainMenus[mainId].secondMenus.length - 1
+          ].id + 1
+        : 0;
+
     let currentMenus = [...mainMenus];
-    let newSecondaryMenu: IInnerMenus = {
-      id: mainMenus[mainId].secondMenus.length,
+    let newSecondaryMenu: ISecondMenus = {
+      thirdMenus: [],
+      id: id,
     };
     currentMenus[mainId].secondMenus.push(newSecondaryMenu);
     setMainMenus(currentMenus);
@@ -54,21 +65,35 @@ const SideBar: React.FC<Props> = ({}) => {
     }
   };
 
-  const addThirdMenu = (mainId: number) => {
+  const addThirdMenu = (mainId: number, secondId: number) => {
+    let id =
+      mainMenus[mainId].secondMenus[secondId].thirdMenus.length > 0
+        ? mainMenus[mainId].secondMenus[secondId].thirdMenus[
+            mainMenus[mainId].secondMenus[secondId].thirdMenus.length - 1
+          ].id + 1
+        : 0;
+
     let currentMenus = [...mainMenus];
-    let newThirdMenu: IInnerMenus = {
-      id: mainMenus[mainId].thirdMenus.length,
+    let newThirdMenu: IThirdMenus = {
+      id: id,
     };
-    currentMenus[mainId].thirdMenus.push(newThirdMenu);
+    currentMenus[mainId].secondMenus[secondId].thirdMenus.push(newThirdMenu);
     setMainMenus(currentMenus);
   };
 
-  const removeThirdMenu = (mainId: number, thirdId: number) => {
-    if (mainMenus[mainId].thirdMenus.length > 0) {
+  const removeThirdMenu = (
+    mainId: number,
+    secondId: number,
+    thirdId: number
+  ) => {
+    if (mainMenus[mainId].secondMenus[secondId].thirdMenus.length > 0) {
       let currentMenus = [...mainMenus];
-      mainMenus[mainId].thirdMenus.map((tm, index) => {
+      mainMenus[mainId].secondMenus[secondId].thirdMenus.map((tm, index) => {
         if (tm.id === thirdId) {
-          currentMenus[mainId].thirdMenus.splice(index, 1);
+          currentMenus[mainId].secondMenus[secondId].thirdMenus.splice(
+            index,
+            1
+          );
         }
       });
       setMainMenus(currentMenus);
