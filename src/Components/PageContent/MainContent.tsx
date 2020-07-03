@@ -15,7 +15,10 @@ const PageContent: React.FC<Props> = ({ currentPage }) => {
   return currentPage ? (
     <div>
       <div>
-        <h1 className="display-4">{currentPage.title}</h1>
+        <h1 className="display-4">
+          {currentPage.title}
+          {/* <input type="text" defaultValue={currentPage.title}></input> */}
+        </h1>
         <div className="text-right">
           <div className="btn-group">
             <button type="button" className="btn btn-primary btn-sm mr-1">

@@ -97,7 +97,7 @@ const SideBar: React.FC<Props> = ({
       id: id,
       content: {
         title: "Third Menu Title",
-        paragraph: [{ content: "Second Menu Paragraph" }],
+        paragraph: [{ content: "Third Menu Paragraph" }],
       },
     };
     currentMenus[mainId].secondMenus[secondId].thirdMenus.push(newThirdMenu);
