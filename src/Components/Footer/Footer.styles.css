@@ -11,11 +11,11 @@
   margin-left: 0em;
 }
 .innerText {
-  margin-left: 2em;
+  margin-left: 10em;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
   .innerText {
-    margin-left: 10em;
+    margin-left: 5em;
   }
 }

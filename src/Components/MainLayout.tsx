@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import SideBar from "./SideBar/SideBar";
 import Footer from "./Footer/Footer";
 import PageContent from "./PageContent/MainContent";
+import "./SideBar/SideBar.styles.css";
 import {
   IMainMenu,
   IMenuContent,
@@ -18,6 +19,9 @@ function MainLayout() {
 
   const updateMenus = (newMenus: IMainMenu[]) => {
     setMainMenus(newMenus);
+    if (newMenus.length <= 0) {
+      setCurrentPage(null);
+    }
   };
 
   const showMenuContent = (content: IMenuContent) => {
@@ -169,16 +173,16 @@ function MainLayout() {
 
   return (
     <Fragment>
-      <div className="container-fluid">
+      <div className="container-fluid bg-light">
         <div className="row">
-          <div className="col-md-2">
+          <nav className="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
             <SideBar
               mainMenus={mainMenus}
               updateMenus={updateMenus}
               showMenuContent={showMenuContent}
             />
-          </div>
-          <div className="col-md-10 p-5 mb-4">
+          </nav>
+          <div className="col-md-9 p-5 mb-4">
             <PageContent
               currentPage={currentPage}
               addParagraph={addParagraph}

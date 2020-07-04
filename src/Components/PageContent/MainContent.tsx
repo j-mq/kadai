@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faSave, faPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { IMenuContent } from "../../dataModels";
 import "./MainContent.styles.css";
 import Paragraph from "./Paragraph";
@@ -43,6 +43,8 @@ const PageContent: React.FC<Props> = ({
   const [title, setTitle] = useState<string>(
     currentPage ? currentPage.title : ""
   );
+
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   useEffect(() => {
     if (currentPage) {
@@ -88,33 +90,51 @@ const PageContent: React.FC<Props> = ({
     ));
   };
 
+  const setTitleAndSave = () => {
+    if (!currentPage) {
+      return;
+    }
+    setEditMode(false);
+    saveTitle(
+      title,
+      currentPage.mainMenuId,
+      currentPage.secondMenuId,
+      currentPage.thirdMenuId
+    );
+  };
+
   return currentPage ? (
     <div>
       <div>
-        <h1>
-          <input
-            className="no-border"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          ></input>
-        </h1>
+        {editMode ? (
+          <h1>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            ></input>
+          </h1>
+        ) : (
+          <h1>{title}</h1>
+        )}
         <div className="text-right">
-          <button
-            type="button"
-            className="btn btn-primary btn-sm"
-            disabled={contentNotSaved()}
-            onClick={() =>
-              saveTitle(
-                title,
-                currentPage.mainMenuId,
-                currentPage.secondMenuId,
-                currentPage.thirdMenuId
-              )
-            }
-          >
-            <FontAwesomeIcon icon={faSave}></FontAwesomeIcon>
-          </button>
+          {editMode ? (
+            <button
+              type="button"
+              className="btn btn-primary btn-sm mr-1"
+              onClick={() => setTitleAndSave()}
+            >
+              <FontAwesomeIcon icon={faSave}></FontAwesomeIcon>
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn btn-primary btn-sm mr-1"
+              onClick={() => setEditMode(true)}
+            >
+              <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
+            </button>
+          )}
         </div>
       </div>
       {makeParagraphs()}

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./SideBar.styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import MainMenus from "./MainMenus";
@@ -169,27 +168,25 @@ const SideBar: React.FC<Props> = ({
   };
 
   return (
-    <nav className="col-md-2 d-none d-md-block bg-dark sidebar text-white">
-      <div className="sidebar-inner">
-        <MainMenus
-          mainMenus={mainMenus}
-          removeMainMenu={removeMainMenu}
-          addSecondaryMenu={addSecondaryMenu}
-          removeSecondaryMenu={removeSecondaryMenu}
-          addThirdMenu={addThirdMenu}
-          removeThirdMenu={removeThirdMenu}
-          showMenuContent={showMenuContent}
-        />
-        <div className="text-center">
-          <button
-            className="btn btn-sm btn-link text-white p-0"
-            onClick={addMainMenu}
-          >
-            <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
-          </button>
-        </div>
+    <div className="sidebar-sticky pt-3 pb-3 text-white">
+      <MainMenus
+        mainMenus={mainMenus}
+        removeMainMenu={removeMainMenu}
+        addSecondaryMenu={addSecondaryMenu}
+        removeSecondaryMenu={removeSecondaryMenu}
+        addThirdMenu={addThirdMenu}
+        removeThirdMenu={removeThirdMenu}
+        showMenuContent={showMenuContent}
+      />
+      <div className="text-center">
+        <button
+          className="btn btn-sm btn-link text-white p-0"
+          onClick={addMainMenu}
+        >
+          <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
+        </button>
       </div>
-    </nav>
+    </div>
   );
 };
 
