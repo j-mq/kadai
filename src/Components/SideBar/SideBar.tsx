@@ -53,11 +53,12 @@ const SideBar: React.FC<Props> = ({
   };
 
   const addSecondaryMenu = (mainId: number) => {
+    const targetMenu = mainMenus.filter((maMe) => maMe.id === mainId);
+    console.log("target Menu", targetMenu);
+
     let id =
-      mainMenus[mainId].secondMenus.length > 0
-        ? mainMenus[mainId].secondMenus[
-            mainMenus[mainId].secondMenus.length - 1
-          ].id + 1
+      targetMenu[0].secondMenus.length > 0
+        ? targetMenu[0].secondMenus[targetMenu[0].secondMenus.length - 1].id + 1
         : 0;
 
     let currentMenus = [...mainMenus];
@@ -71,16 +72,26 @@ const SideBar: React.FC<Props> = ({
         secondMenuId: id,
       },
     };
-    currentMenus[mainId].secondMenus.push(newSecondaryMenu);
+
+    mainMenus.map((maMe, index) => {
+      if (maMe.id === mainId) {
+        currentMenus[index].secondMenus.push(newSecondaryMenu);
+      }
+    });
     updateMenus(currentMenus);
   };
 
   const removeSecondaryMenu = (mainId: number, secondId: number) => {
-    if (mainMenus[mainId].secondMenus.length > 0) {
+    const targetMenu = mainMenus.filter((maMe) => maMe.id === mainId);
+    if (targetMenu[0].secondMenus.length > 0) {
       let currentMenus = [...mainMenus];
-      mainMenus[mainId].secondMenus.map((sm, index) => {
-        if (sm.id === secondId) {
-          currentMenus[mainId].secondMenus.splice(index, 1);
+      mainMenus.map((maMe, maIndex) => {
+        if (maMe.id == mainId) {
+          maMe.secondMenus.map((seMe, seIndex) => {
+            if (seMe.id === secondId) {
+              currentMenus[maIndex].secondMenus.splice(seIndex, 1);
+            }
+          });
         }
       });
       updateMenus(currentMenus);
@@ -88,10 +99,15 @@ const SideBar: React.FC<Props> = ({
   };
 
   const addThirdMenu = (mainId: number, secondId: number) => {
+    const targetMenu = mainMenus.filter((maMe) => maMe.id === mainId);
+    const targetSecondMenu = targetMenu[0].secondMenus.filter(
+      (seMe) => seMe.id === secondId
+    );
+
     let id =
-      mainMenus[mainId].secondMenus[secondId].thirdMenus.length > 0
-        ? mainMenus[mainId].secondMenus[secondId].thirdMenus[
-            mainMenus[mainId].secondMenus[secondId].thirdMenus.length - 1
+      targetSecondMenu[0].thirdMenus.length > 0
+        ? targetSecondMenu[0].thirdMenus[
+            targetSecondMenu[0].thirdMenus.length - 1
           ].id + 1
         : 0;
 
@@ -106,7 +122,18 @@ const SideBar: React.FC<Props> = ({
         thirdMenuId: id,
       },
     };
-    currentMenus[mainId].secondMenus[secondId].thirdMenus.push(newThirdMenu);
+
+    mainMenus.map((maMe, maIndex) => {
+      if (maMe.id === mainId) {
+        maMe.secondMenus.map((seMe, seIndex) => {
+          if (seMe.id === secondId) {
+            currentMenus[maIndex].secondMenus[seIndex].thirdMenus.push(
+              newThirdMenu
+            );
+          }
+        });
+      }
+    });
     updateMenus(currentMenus);
   };
 
@@ -115,14 +142,26 @@ const SideBar: React.FC<Props> = ({
     secondId: number,
     thirdId: number
   ) => {
-    if (mainMenus[mainId].secondMenus[secondId].thirdMenus.length > 0) {
+    const targetMenu = mainMenus.filter((maMe) => maMe.id === mainId);
+    const targetSecondMenu = targetMenu[0].secondMenus.filter(
+      (seMe) => seMe.id === secondId
+    );
+    if (targetSecondMenu[0].thirdMenus.length > 0) {
       let currentMenus = [...mainMenus];
-      mainMenus[mainId].secondMenus[secondId].thirdMenus.map((tm, index) => {
-        if (tm.id === thirdId) {
-          currentMenus[mainId].secondMenus[secondId].thirdMenus.splice(
-            index,
-            1
-          );
+      mainMenus.map((maMe, maIndex) => {
+        if (maMe.id == mainId) {
+          maMe.secondMenus.map((seMe, seIndex) => {
+            if (seMe.id === secondId) {
+              seMe.thirdMenus.map((thMe, thIndex) => {
+                if (thMe.id === thirdId) {
+                  currentMenus[maIndex].secondMenus[seIndex].thirdMenus.splice(
+                    thIndex,
+                    1
+                  );
+                }
+              });
+            }
+          });
         }
       });
       updateMenus(currentMenus);

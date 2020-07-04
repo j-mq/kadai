@@ -65,6 +65,7 @@ const PageContent: React.FC<Props> = ({
     }
     return currentPage.paragraph.map((pa) => (
       <Paragraph
+        key={`paragraph-${pa.id}`}
         paragraph={pa}
         removeThisParagraph={(paragraphId) =>
           removeParagraph(

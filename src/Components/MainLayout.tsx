@@ -14,6 +14,8 @@ function MainLayout() {
   const [mainMenus, setMainMenus] = useState<IMainMenu[]>([]);
   const [currentPage, setCurrentPage] = useState<IMenuContent | null>(null);
 
+  console.log("Main menus", mainMenus);
+
   const updateMenus = (newMenus: IMainMenu[]) => {
     setMainMenus(newMenus);
   };
