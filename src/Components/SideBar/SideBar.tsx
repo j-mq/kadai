@@ -131,7 +131,7 @@ const SideBar: React.FC<Props> = ({
 
   return (
     <nav className="col-md-2 d-none d-md-block bg-dark sidebar text-white">
-      <div className="sidebar-sticky">
+      <div className="sidebar-inner">
         <MainMenus
           mainMenus={mainMenus}
           removeMainMenu={removeMainMenu}

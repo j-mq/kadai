@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faSave, faPlus } from "@fortawesome/free-solid-svg-icons";
-import Paragraphs from "./Paragraphs";
-import { IMenuContent, IParagraph } from "../../dataModels";
+import { faSave, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { IMenuContent } from "../../dataModels";
 import "./MainContent.styles.css";
+import Paragraph from "./Paragraph";
 
 export interface Props {
   currentPage: IMenuContent | null;
@@ -24,6 +24,13 @@ export interface Props {
     secondMenuId?: number,
     thirdMenuId?: number
   ) => void;
+  saveParagraph: (
+    newParagraph: string,
+    paragraphId: number,
+    mainMenuId: number,
+    secondMenuId?: number,
+    thirdMenuId?: number
+  ) => void;
 }
 
 const PageContent: React.FC<Props> = ({
@@ -31,13 +38,11 @@ const PageContent: React.FC<Props> = ({
   addParagraph,
   removeParagraph,
   saveTitle,
+  saveParagraph,
 }) => {
   const [title, setTitle] = useState<string>(
     currentPage ? currentPage.title : ""
   );
-  const [paragraphs, setParagraphs] = useState<IParagraph[]>([]);
-
-  console.log("title", title, "current", currentPage);
 
   useEffect(() => {
     if (currentPage) {
@@ -52,6 +57,34 @@ const PageContent: React.FC<Props> = ({
       }
     }
     return true;
+  };
+
+  const makeParagraphs = () => {
+    if (!currentPage) {
+      return;
+    }
+    return currentPage.paragraph.map((pa) => (
+      <Paragraph
+        paragraph={pa}
+        removeThisParagraph={(paragraphId) =>
+          removeParagraph(
+            paragraphId,
+            currentPage.mainMenuId,
+            currentPage.secondMenuId,
+            currentPage.thirdMenuId
+          )
+        }
+        saveThisParagraph={(newParagraph, paragraphId) =>
+          saveParagraph(
+            newParagraph,
+            paragraphId,
+            currentPage.mainMenuId,
+            currentPage.secondMenuId,
+            currentPage.thirdMenuId
+          )
+        }
+      ></Paragraph>
+    ));
   };
 
   return currentPage ? (
@@ -83,17 +116,7 @@ const PageContent: React.FC<Props> = ({
           </button>
         </div>
       </div>
-      <Paragraphs
-        paragraphs={currentPage.paragraph}
-        removeThisParagraph={(id) =>
-          removeParagraph(
-            id,
-            currentPage.mainMenuId,
-            currentPage.secondMenuId,
-            currentPage.thirdMenuId
-          )
-        }
-      />
+      {makeParagraphs()}
       <div className="text-center">
         <button
           type="button"

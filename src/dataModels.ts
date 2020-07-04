@@ -32,10 +32,5 @@ export enum contentEditTypes {
   addParagraph,
   removeParagraph,
   saveTitle,
-}
-
-export enum menuTypes {
-  mainMenu,
-  secondMenu,
-  thirdMenu,
+  saveParagraph,
 }
