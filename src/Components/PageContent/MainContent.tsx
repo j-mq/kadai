@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faSave, faPlus } from "@fortawesome/free-solid-svg-icons";
 import Paragraphs from "./Paragraphs";
@@ -18,36 +18,69 @@ export interface Props {
     secondMenuId?: number,
     thirdMenuId?: number
   ) => void;
+  saveTitle: (
+    newTitle: string,
+    mainMenuId: number,
+    secondMenuId?: number,
+    thirdMenuId?: number
+  ) => void;
 }
 
 const PageContent: React.FC<Props> = ({
   currentPage,
   addParagraph,
   removeParagraph,
+  saveTitle,
 }) => {
-  const [title, setTitle] = useState<string>("Title");
+  const [title, setTitle] = useState<string>(
+    currentPage ? currentPage.title : ""
+  );
   const [paragraphs, setParagraphs] = useState<IParagraph[]>([]);
+
+  console.log("title", title, "current", currentPage);
+
+  useEffect(() => {
+    if (currentPage) {
+      setTitle(currentPage.title);
+    }
+  }, [currentPage]);
+
+  const contentNotSaved = () => {
+    if (currentPage) {
+      if (title !== currentPage.title) {
+        return false;
+      }
+    }
+    return true;
+  };
 
   return currentPage ? (
     <div>
       <div>
         <h1>
-          {/* {currentPage.title} */}
           <input
             className="no-border"
             type="text"
-            value={currentPage.title}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           ></input>
         </h1>
         <div className="text-right">
-          <div className="btn-group">
-            <button type="button" className="btn btn-primary btn-sm mr-1">
-              <FontAwesomeIcon icon={faTimes}></FontAwesomeIcon>
-            </button>
-            <button type="button" className="btn btn-primary btn-sm">
-              <FontAwesomeIcon icon={faSave}></FontAwesomeIcon>
-            </button>
-          </div>
+          <button
+            type="button"
+            className="btn btn-primary btn-sm"
+            disabled={contentNotSaved()}
+            onClick={() =>
+              saveTitle(
+                title,
+                currentPage.mainMenuId,
+                currentPage.secondMenuId,
+                currentPage.thirdMenuId
+              )
+            }
+          >
+            <FontAwesomeIcon icon={faSave}></FontAwesomeIcon>
+          </button>
         </div>
       </div>
       <Paragraphs

@@ -14,6 +14,8 @@ function MainLayout() {
   const [mainMenus, setMainMenus] = useState<IMainMenu[]>([]);
   const [currentPage, setCurrentPage] = useState<IMenuContent | null>(null);
 
+  console.log("THe main object", mainMenus);
+
   const updateMenus = (newMenus: IMainMenu[]) => {
     setMainMenus(newMenus);
   };
@@ -50,12 +52,29 @@ function MainLayout() {
     );
   };
 
+  const saveTitle = (
+    newTitle: string,
+    mainMenuId: number,
+    secondMenuId?: number,
+    thirdMenuId?: number
+  ) => {
+    editContentIteratior(
+      contentEditTypes.saveTitle,
+      mainMenuId,
+      secondMenuId,
+      thirdMenuId,
+      undefined,
+      newTitle
+    );
+  };
+
   const editContentIteratior = (
     action: contentEditTypes,
     mainMenuId: number,
     secondMenuId?: number,
     thirdMenuId?: number,
-    paragraphId?: number
+    paragraphId?: number,
+    newText?: string
   ) => {
     let currentMenus = [...mainMenus];
     currentMenus.map((maMe) => {
@@ -66,17 +85,18 @@ function MainLayout() {
               if (typeof thirdMenuId !== "undefined") {
                 seMe.thirdMenus.map((thMe) => {
                   if (thMe.id === thirdMenuId) {
-                    editContent(action, thMe, paragraphId);
+                    editContent(action, thMe, paragraphId, newText);
                     return;
                   }
                 });
+              } else {
+                editContent(action, seMe, paragraphId, newText);
+                return;
               }
-              editContent(action, seMe, paragraphId);
-              return;
             }
           });
         } else {
-          editContent(action, maMe, paragraphId);
+          editContent(action, maMe, paragraphId, newText);
           return;
         }
       }
@@ -87,7 +107,8 @@ function MainLayout() {
   const editContent = (
     action: contentEditTypes,
     menu: IMainMenu | ISecondMenus | IThirdMenus,
-    paragraphId?: number
+    paragraphId?: number,
+    newText?: string
   ) => {
     let paragraph = "New paragraph";
     switch (action) {
@@ -105,6 +126,11 @@ function MainLayout() {
               menu.content.paragraph.splice(index, 1);
             }
           });
+        }
+        break;
+      case contentEditTypes.saveTitle:
+        if (typeof newText !== "undefined") {
+          menu.content.title = newText;
         }
         break;
       default:
@@ -128,6 +154,7 @@ function MainLayout() {
               currentPage={currentPage}
               addParagraph={addParagraph}
               removeParagraph={removeParagraph}
+              saveTitle={saveTitle}
             />
           </div>
         </div>

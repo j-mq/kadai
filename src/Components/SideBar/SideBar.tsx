@@ -21,7 +21,7 @@ const SideBar: React.FC<Props> = ({
   updateMenus,
   showMenuContent,
 }) => {
-  console.log("The main menus", mainMenus);
+  //console.log("The main menus", mainMenus);
 
   const addMainMenu = () => {
     let id = mainMenus.length > 0 ? mainMenus[mainMenus.length - 1].id + 1 : 0;

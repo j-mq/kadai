@@ -31,6 +31,7 @@ export interface IParagraph {
 export enum contentEditTypes {
   addParagraph,
   removeParagraph,
+  saveTitle,
 }
 
 export enum menuTypes {
