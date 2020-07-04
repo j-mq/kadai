@@ -33,7 +33,7 @@ const MainMenus: React.FC<Props> = ({
               href="#"
               onClick={() => showMenuContent(maMe.content)}
             >
-              Main menu
+              {maMe.content.title}
             </a>
             <div className="btn-group text-right">
               <button

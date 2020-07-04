@@ -29,7 +29,7 @@ const SecondMenus: React.FC<Props> = ({
             href="#"
             onClick={() => showMenuContent(seMe.content)}
           >
-            2nd Menu
+            {seMe.content.title}
           </a>
           <div className="btn-group text-right">
             <button

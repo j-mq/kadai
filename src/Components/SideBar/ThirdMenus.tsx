@@ -26,7 +26,7 @@ const ThirdMenus: React.FC<Props> = ({
           href="#"
           onClick={() => showMenuContent(thMe.content)}
         >
-          3rd Menu
+          {thMe.content.title}
         </a>
         <div className="text-right">
           <button
