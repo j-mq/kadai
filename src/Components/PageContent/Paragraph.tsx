@@ -53,14 +53,6 @@ const Paragraph: React.FC<Props> = ({
           onClick={() =>
             saveThisParagraph(currentParagraph.text, currentParagraph.id)
           }
-          // onClick={() =>
-          //   saveTitle(
-          //     title,
-          //     currentPage.mainMenuId,
-          //     currentPage.secondMenuId,
-          //     currentPage.thirdMenuId
-          //   )
-          // }
         >
           <FontAwesomeIcon icon={faSave}></FontAwesomeIcon>
         </button>
