@@ -1,22 +1,25 @@
 {
   "files": {
-    "main.js": "/kadai/static/js/main.d7da7a2c.chunk.js",
-    "main.js.map": "/kadai/static/js/main.d7da7a2c.chunk.js.map",
+    "main.css": "/kadai/static/css/main.df9e92ff.chunk.css",
+    "main.js": "/kadai/static/js/main.86b8763d.chunk.js",
+    "main.js.map": "/kadai/static/js/main.86b8763d.chunk.js.map",
     "runtime-main.js": "/kadai/static/js/runtime-main.a9ee0d6f.js",
     "runtime-main.js.map": "/kadai/static/js/runtime-main.a9ee0d6f.js.map",
     "static/css/2.829c9cb5.chunk.css": "/kadai/static/css/2.829c9cb5.chunk.css",
-    "static/js/2.8213543c.chunk.js": "/kadai/static/js/2.8213543c.chunk.js",
-    "static/js/2.8213543c.chunk.js.map": "/kadai/static/js/2.8213543c.chunk.js.map",
+    "static/js/2.bc53fb85.chunk.js": "/kadai/static/js/2.bc53fb85.chunk.js",
+    "static/js/2.bc53fb85.chunk.js.map": "/kadai/static/js/2.bc53fb85.chunk.js.map",
     "index.html": "/kadai/index.html",
-    "precache-manifest.bff57068c900328605529bcb2a5fe9be.js": "/kadai/precache-manifest.bff57068c900328605529bcb2a5fe9be.js",
+    "precache-manifest.1f4915b478f407664e602057b6b5d884.js": "/kadai/precache-manifest.1f4915b478f407664e602057b6b5d884.js",
     "service-worker.js": "/kadai/service-worker.js",
     "static/css/2.829c9cb5.chunk.css.map": "/kadai/static/css/2.829c9cb5.chunk.css.map",
-    "static/js/2.8213543c.chunk.js.LICENSE.txt": "/kadai/static/js/2.8213543c.chunk.js.LICENSE.txt"
+    "static/css/main.df9e92ff.chunk.css.map": "/kadai/static/css/main.df9e92ff.chunk.css.map",
+    "static/js/2.bc53fb85.chunk.js.LICENSE.txt": "/kadai/static/js/2.bc53fb85.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a9ee0d6f.js",
     "static/css/2.829c9cb5.chunk.css",
-    "static/js/2.8213543c.chunk.js",
-    "static/js/main.d7da7a2c.chunk.js"
+    "static/js/2.bc53fb85.chunk.js",
+    "static/css/main.df9e92ff.chunk.css",
+    "static/js/main.86b8763d.chunk.js"
   ]
 }

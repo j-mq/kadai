@@ -1,0 +1,2 @@
+.sidebar{position:fixed;top:0;bottom:0;left:0;z-index:100;padding:1em 0 0;box-shadow:inset -1px 0 0 rgba(0,0,0,.1)}.sidebar-inner{overflow-y:auto;overflow-x:hidden;height:calc(100vh - 48px);padding-top:.5rem}.sidebar .nav-link{font-weight:500}.sidebar .nav-link .feather{margin-right:4px}.footer{position:fixed;bottom:0;width:100%;margin-left:0}.innerText{margin-left:2em}@media only screen and (min-width:768px){.innerText{margin-left:10em}}.no-border{border:0;box-shadow:none}.no-resize{resize:none}
+/*# sourceMappingURL=main.df9e92ff.chunk.css.map */
