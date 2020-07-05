@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2a1ca4d4ebc0f32f80d648eba0fc0ce7",
+    "revision": "b11e6b622cc9cc13c6a29713978ad19c",
     "url": "/kadai/index.html"
   },
   {
-    "revision": "bfe6e6f5c40bcc945568",
+    "revision": "e48f2f4eefd2579c34c7",
     "url": "/kadai/static/css/main.1c865602.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/kadai/static/js/2.b3244fb2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "bfe6e6f5c40bcc945568",
-    "url": "/kadai/static/js/main.e362aa63.chunk.js"
+    "revision": "e48f2f4eefd2579c34c7",
+    "url": "/kadai/static/js/main.2458e3fe.chunk.js"
   },
   {
     "revision": "641363c4e2dfbcb6018a",
