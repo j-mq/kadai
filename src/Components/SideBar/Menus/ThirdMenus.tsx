@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { IThirdMenus, IMenuContent } from "../../dataModels";
+import { IThirdMenus, IMenuContent } from "../../../dataModels";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 

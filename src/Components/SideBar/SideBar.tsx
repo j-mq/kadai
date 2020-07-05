@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import MainMenus from "./MainMenus";
+import MainMenus from "./Menus/MainMenus";
 import {
   IMainMenu,
   ISecondMenus,
@@ -20,7 +20,7 @@ const SideBar: React.FC<Props> = ({
   updateMenus,
   showMenuContent,
 }) => {
-  //console.log("The main menus", mainMenus);
+  const paragraphDefault = `<h2>Header 2</h2><p>paragraph</p><a href="#">link</a>`;
 
   const addMainMenu = () => {
     let id = mainMenus.length > 0 ? mainMenus[mainMenus.length - 1].id + 1 : 0;
@@ -31,7 +31,12 @@ const SideBar: React.FC<Props> = ({
       id: id,
       content: {
         title: "Main Menu Title",
-        paragraph: [{ id: 0, text: "Main Menu Paragraph" }],
+        paragraph: [
+          {
+            id: 0,
+            text: paragraphDefault,
+          },
+        ],
         mainMenuId: id,
       },
     };
@@ -53,7 +58,6 @@ const SideBar: React.FC<Props> = ({
 
   const addSecondaryMenu = (mainId: number) => {
     const targetMenu = mainMenus.filter((maMe) => maMe.id === mainId);
-    console.log("target Menu", targetMenu);
 
     let id =
       targetMenu[0].secondMenus.length > 0
@@ -66,7 +70,7 @@ const SideBar: React.FC<Props> = ({
       id: id,
       content: {
         title: "Second Menu Title",
-        paragraph: [{ id: 0, text: "Second Menu Paragraph" }],
+        paragraph: [{ id: 0, text: paragraphDefault }],
         mainMenuId: mainId,
         secondMenuId: id,
       },
@@ -115,7 +119,7 @@ const SideBar: React.FC<Props> = ({
       id: id,
       content: {
         title: "Third Menu Title",
-        paragraph: [{ id: 0, text: "Third Menu Paragraph" }],
+        paragraph: [{ id: 0, text: paragraphDefault }],
         mainMenuId: mainId,
         secondMenuId: secondId,
         thirdMenuId: id,

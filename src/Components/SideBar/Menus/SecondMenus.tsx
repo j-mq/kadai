@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { IMainMenu, ISecondMenus, IMenuContent } from "../../dataModels";
+import { IMainMenu, ISecondMenus, IMenuContent } from "../../../dataModels";
 import ThirdMenus from "./ThirdMenus";
 
 export interface Props {

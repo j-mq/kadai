@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import SecondMenus from "./SecondMenus";
-import { IMainMenu, IMenuContent } from "../../dataModels";
+import { IMainMenu, IMenuContent } from "../../../dataModels";
 
 export interface Props {
   mainMenus: IMainMenu[];
